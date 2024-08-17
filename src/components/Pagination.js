@@ -12,13 +12,19 @@ const Pagination = ({ totalPages, selectPageIndex, handlePageIndex }) => {
   for (let i = 1; i <= totalPages; i++) {
     pageNumbers.push(i);
   }
-  
+
   return (
     <PaginationContainer>
       <PageNumbersContainer>
-        <div onClick={() => handlePageIndex(selectPageIndex - 1)}>
+        {/* Botão para ir à primeira página */}
+        <ArrowButton
+          onClick={() => handlePageIndex(1)}
+          disabled={selectPageIndex === 1}
+        >
           <MdKeyboardDoubleArrowLeft />
-        </div>
+        </ArrowButton>
+        
+        {/* Números das páginas */}
         {pageNumbers?.map((e) => (
           <PageNumber
             key={e}
@@ -28,19 +34,34 @@ const Pagination = ({ totalPages, selectPageIndex, handlePageIndex }) => {
             {e}
           </PageNumber>
         ))}
-        <div onClick={() => handlePageIndex(selectPageIndex + 1)}>
+        
+        {/* Botão para ir à última página */}
+        <ArrowButton
+          onClick={() => handlePageIndex(totalPages)}
+          disabled={selectPageIndex === totalPages}
+        >
           <MdKeyboardDoubleArrowRight />
-        </div>
+        </ArrowButton>
       </PageNumbersContainer>
+
       <ButtonsContainer>
-        <div>
+        {/* Botão para ir à página anterior */}
+        <StyledButton
+          onClick={() => handlePageIndex(selectPageIndex - 1)}
+          disabled={selectPageIndex === 1}
+        >
           <FaLongArrowAltLeft />
           <span>Older</span>
-        </div>
-        <div>
+        </StyledButton>
+
+        {/* Botão para ir à próxima página */}
+        <StyledButton
+          onClick={() => handlePageIndex(selectPageIndex + 1)}
+          disabled={selectPageIndex === totalPages}
+        >
           <span>Newer</span>
           <FaLongArrowAltRight />
-        </div>
+        </StyledButton>
       </ButtonsContainer>
     </PaginationContainer>
   );
@@ -59,19 +80,6 @@ const PageNumbersContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  > div {
-    border: 2px solid #dadada;
-    border-left: none;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 14px 0;
-    font-size: 22px;
-    cursor: pointer;
-    user-select: none;
-  }
   > div:first-child {
     border-left: 2px solid #dadada;
     border-radius: 5px 0 0 5px;
@@ -87,23 +95,57 @@ const PageNumbersContainer = styled.div`
     border-color: #884b88;
   }
 `;
+
+const ArrowButton = styled.div`
+  border: 2px solid #dadada;
+  border-left: none;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 0;
+  font-size: 22px;
+  cursor: pointer;
+  user-select: none;
+  color: ${(props) => (props.disabled ? "#DADADA !important" : "initial")};
+  opacity: ${(props) => (props.disabled ? "0.5" : "1")};
+  pointer-events: ${(props) => (props.disabled ? "none" : "auto")};
+  background-color: ${(props) => (props.disabled ? "#F5F5F5" : "initial")};
+`;
+
 const PageNumber = styled.div`
+  border: 2px solid #dadada;
+  border-left: none;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 0;
+  font-size: 22px;
+  cursor: pointer;
+  user-select: none;
   color: ${(props) => (props.isSelected ? "#FFFFFF" : "#800080")};
   background-color: ${(props) => (props.isSelected ? "#800080" : "initial")};
-  border-color: ${(props) =>
-    props.isSelected ? "#884B88 !important" : "initial"};
+  border-color: ${(props) => (props.isSelected ? "#884B88" : "#dadada")};
 `;
+
 const ButtonsContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  > div {
-    display: flex;
-    column-gap: 1.4vh;
-    font-size: 22px;
-    border: 2px solid #bdbdbd;
-    border-radius: 50px;
-    padding: 12px 24px;
-    color: #bdbdbd;
-  }
+`;
+
+const StyledButton = styled.div`
+  display: flex;
+  column-gap: 1.4vh;
+  font-size: 22px;
+  border: 2px solid #bdbdbd;
+  border-radius: 50px;
+  padding: 12px 24px;
+  color: ${(props) => (props.disabled ? "#DADADA" : "#BDBDBD")};
+  opacity: ${(props) => (props.disabled ? "0.5" : "1")};
+  pointer-events: ${(props) => (props.disabled ? "none" : "auto")};
+  background-color: ${(props) => (props.disabled ? "#F5F5F5" : "initial")};
 `;

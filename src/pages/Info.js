@@ -7,9 +7,13 @@ const Info = () => (
     <SubTitle>Pedro Leoncio</SubTitle>
     <Description>This mini-project was created by using:</Description>
     <StyledTopics>
-      <li>Technology A</li>
-      <li>Technology B</li>
-      <li>Technology C</li>
+      <li>Front-End: React</li>
+      <li>Front-End: Styled Components</li>
+      <li>Front-End: Axios</li>
+      <li>Back-End: Node.Js</li>
+      <li>Back-End: Typescript</li>
+      <li>Back-End: PrismaORM</li>
+      <li>Database: PostgreSQL</li>
     </StyledTopics>
 
   </HomeContainer>
