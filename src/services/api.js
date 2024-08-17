@@ -2,12 +2,12 @@ import axios from "axios";
 
 const BASE_URL = process.env.REACT_APP_BACK_END_URL;
 
-function GetOrders() {
-  return axios.get(`${BASE_URL}/orders`);
+function GetOrdersWithPagination(page) {
+  return axios.get(`${BASE_URL}/orders/pagination/?page=${page}&pageSize=${10}`);
 }
 
 const api = {
-  GetOrders,
+  GetOrdersWithPagination,
 };
 
 export default api;

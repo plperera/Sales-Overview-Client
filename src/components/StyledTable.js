@@ -1,51 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 
-const StyledTable = () => {
-  const orders = [
-    {
-      orderId: "2019060001",
-      product: "Laptop #1",
-      price: 1000,
-      sellerName: "Seller #1",
-      country: "BRA",
-    },
-    {
-      orderId: "2019060001",
-      product: "Laptop #1",
-      price: 1000,
-      sellerName: "Seller #1",
-      country: "BRA",
-    },
-    {
-      orderId: "2019060001",
-      product: "Laptop #1",
-      price: 1000,
-      sellerName: "Seller #1",
-      country: "BRA",
-    },
-    {
-      orderId: "2019060001",
-      product: "Laptop #1",
-      price: 1000,
-      sellerName: "Seller #1",
-      country: "BRA",
-    },
-    {
-      orderId: "2019060001",
-      product: "Laptop #1",
-      price: 1000,
-      sellerName: "Seller #1",
-      country: "BRA",
-    },
-    {
-      orderId: "2019060001",
-      product: "Laptop #1",
-      price: 1000,
-      sellerName: "Seller #1",
-      country: "BRA",
-    },
-  ];
+const StyledTable = ({ ordersData }) => {
+  // Cria um array com 10 posições
+  const rows = new Array(10).fill(null);
 
   return (
     <TableContainer>
@@ -59,15 +17,18 @@ const StyledTable = () => {
         </tr>
       </TableHead>
       <TableBody>
-        {orders.map((order) => (
-          <tr key={order.orderId}>
-            <td>{order.orderId}</td>
-            <td>{order.product}</td>
-            <td>{order.price}</td>
-            <td>{order.sellerName}</td>
-            <td>{order.country}</td>
-          </tr>
-        ))}
+        {rows.map((_, index) => {
+          const order = ordersData?.[index];
+          return (
+            <tr key={order?.orderId || index}>
+              <td>{order?.orderId || "-"}</td>
+              <td>{order?.product || "-"}</td>
+              <td>{order?.price || "-"}</td>
+              <td>{order?.sellerName || "-"}</td>
+              <td>{order?.country || "-"}</td>
+            </tr>
+          );
+        })}
       </TableBody>
     </TableContainer>
   );
