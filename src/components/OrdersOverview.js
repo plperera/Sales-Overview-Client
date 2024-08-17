@@ -6,22 +6,22 @@ import api from "../services/api";
 import Pagination from "./Pagination";
 
 const OrdersOverview = () => {
-  const [selectedSeller, setSelectedSeller] = useState("All sellers");
-  const [selectedCountry, setSelectedCountry] = useState("All sellers");
+  const [selectedSeller, setSelectedSeller] = useState(undefined);
+  const [selectedCountry, setSelectedCountry] = useState(undefined);
   const [selectPageIndex, setSelectPageIndex] = useState(1);
   const [paginationData, setPaginationData] = useState(undefined);
 
   useEffect(() => {
-    console.log(selectPageIndex);
-  }, [selectPageIndex]);
+    GetOrders(selectPageIndex, selectedSeller, selectedCountry);
+  }, [selectPageIndex, selectedSeller, selectedCountry]);
 
-  useEffect(() => {
-    GetOrders(selectPageIndex);
-  }, [selectPageIndex]);
-
-  async function GetOrders(page) {
+  async function GetOrders(page, sellerId, country) {
     try {
-      const response = await api.GetOrdersWithPagination(page);
+      const response = await api.GetOrdersWithPagination({
+        page,
+        sellerId,
+        country,
+      });
       setPaginationData(response?.data);
     } catch (error) {
       console.log(error);
@@ -30,10 +30,12 @@ const OrdersOverview = () => {
 
   const handleSeller = (event) => {
     setSelectedSeller(event.target.value);
+    setSelectPageIndex(1);
   };
 
   const handleCountry = (event) => {
     setSelectedCountry(event.target.value);
+    setSelectPageIndex(1);
   };
 
   const handlePageIndex = (index) => {
@@ -50,16 +52,18 @@ const OrdersOverview = () => {
   };
 
   const sellers = [
+    { id: undefined, name: "All Sellers" },
     { id: 1, name: "Seller #1" },
     { id: 2, name: "Seller #2" },
     { id: 3, name: "Seller #3" },
     { id: 4, name: "Seller #4" },
   ];
 
-  const Countries = [
-    { id: 1, name: "BRA" },
-    { id: 2, name: "ARG" },
-    { id: 3, name: "MEX" },
+  const countries = [
+    { id: undefined, name: "All Countries" },
+    { id: "BRA", name: "BRA" },
+    { id: "ARG", name: "ARG" },
+    { id: "MEX", name: "MEX" },
   ];
 
   return (
@@ -69,13 +73,11 @@ const OrdersOverview = () => {
           handle={handleSeller}
           selected={selectedSeller}
           options={sellers}
-          allOptionsText={"All Sellers"}
         />
         <StyledSelect
           handle={handleCountry}
           selected={selectedCountry}
-          options={Countries}
-          allOptionsText={"All Contries"}
+          options={countries}
         />
       </FiltersContainer>
       <StyledTable ordersData={paginationData?.ordersData} />

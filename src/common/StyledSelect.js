@@ -6,9 +6,8 @@ const StyledSelect = ({ handle, selected, options, allOptionsText }) => {
   return (
     <Wrapper>
       <Select value={selected} onChange={handle}>
-        <option>{allOptionsText}</option>
         {options.map((opt) => (
-          <option key={opt.id}>{opt.name}</option>
+          <option key={opt.id} value={opt.id}>{opt.name}</option>
         ))}
       </Select>
       <Icon />
@@ -20,7 +19,6 @@ export default StyledSelect;
 
 const Wrapper = styled.div`
   position: relative;
-
 `;
 
 const Select = styled.select`

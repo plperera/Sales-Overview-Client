@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 
 const StyledTable = ({ ordersData }) => {
-  // Cria um array com 10 posições
   const rows = new Array(10).fill(null);
 
   return (
@@ -24,7 +23,7 @@ const StyledTable = ({ ordersData }) => {
               <td>{order?.orderId || "-"}</td>
               <td>{order?.product || "-"}</td>
               <td>{order?.price || "-"}</td>
-              <td>{order?.sellerName || "-"}</td>
+              <td>{order?.seller || "-"}</td>
               <td>{order?.country || "-"}</td>
             </tr>
           );
