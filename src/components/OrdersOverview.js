@@ -52,7 +52,7 @@ const OrdersOverview = () => {
   };
 
   const sellers = [
-    { id: undefined, name: "All Sellers" },
+    { id: '', name: "All Sellers" },
     { id: 1, name: "Seller #1" },
     { id: 2, name: "Seller #2" },
     { id: 3, name: "Seller #3" },
@@ -60,7 +60,7 @@ const OrdersOverview = () => {
   ];
 
   const countries = [
-    { id: undefined, name: "All Countries" },
+    { id: '', name: "All Countries" },
     { id: "BRA", name: "BRA" },
     { id: "ARG", name: "ARG" },
     { id: "MEX", name: "MEX" },
