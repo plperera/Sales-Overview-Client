@@ -16,6 +16,7 @@ export default Home;
 const HomeContainer = styled.div`
   min-height: 100vh;
   padding: 11vh 2vw;
+  padding-bottom: 0;
   width: 100%;
   color: #000;
   display: flex;

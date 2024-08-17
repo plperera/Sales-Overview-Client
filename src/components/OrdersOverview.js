@@ -91,11 +91,10 @@ const OrdersOverview = () => {
 export default OrdersOverview;
 
 const Container = styled.div`
-  background-color: #f9f9f9;
   display: flex;
   flex-wrap: wrap;
   justify-content: right;
-  row-gap: 3vh;
+  row-gap: 2vh;
 `;
 const FiltersContainer = styled.div`
   display: flex;
