@@ -8,13 +8,19 @@ function GetOrdersWithPagination({page, sellerId, country, orderBy}) {
   const orderByParam = orderBy ? (`&orderBy=${orderBy}`):("")
   return axios.get(`${BASE_URL}/orders/pagination?page=${page}&pageSize=${6}${sellerIdFilter}${countryFilter}${orderByParam}`);
 }
+
 function GetTopSellers() {
   return axios.get(`${BASE_URL}/sellers/top`);
 }
 
+function GetSellers() {
+  return axios.get(`${BASE_URL}/sellers/all`);
+}
+
 const api = {
   GetOrdersWithPagination,
-  GetTopSellers
+  GetTopSellers,
+  GetSellers
 };
 
 export default api;

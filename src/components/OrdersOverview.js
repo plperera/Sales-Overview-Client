@@ -11,6 +11,7 @@ const OrdersOverview = () => {
   const [selectPageIndex, setSelectPageIndex] = useState(1);
   const [paginationData, setPaginationData] = useState(undefined);
   const [orderBy, setOrderBy] = useState(undefined);
+  const [sellers, setSellers] = useState(undefined);
 
   useEffect(() => {
     GetOrders({
@@ -20,6 +21,19 @@ const OrdersOverview = () => {
       orderBy: orderBy
     });
   }, [selectPageIndex, selectedSeller, selectedCountry, orderBy]);
+
+  useEffect(() => {
+    GetSellers()
+  }, [])
+
+  async function GetSellers() {
+    try {
+      const response = await api.GetSellers();
+      setSellers(response?.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   async function GetOrders({page, sellerId, country, orderBy}) {
     try {
@@ -67,16 +81,7 @@ const OrdersOverview = () => {
     setSelectPageIndex(index);
   };
 
-  const sellers = [
-    { id: '', name: "All Sellers" },
-    { id: 1, name: "Seller #1" },
-    { id: 2, name: "Seller #2" },
-    { id: 3, name: "Seller #3" },
-    { id: 4, name: "Seller #4" },
-  ];
-
   const countries = [
-    { id: '', name: "All Countries" },
     { id: "BRA", name: "BRA" },
     { id: "ARG", name: "ARG" },
     { id: "MEX", name: "MEX" },
@@ -89,11 +94,13 @@ const OrdersOverview = () => {
           handle={handleSeller}
           selected={selectedSeller}
           options={sellers}
+          labelText={"All Sellers"}
         />
         <StyledSelect
           handle={handleCountry}
           selected={selectedCountry}
           options={countries}
+          labelText={"All Countries"}
         />
       </FiltersContainer>
       <StyledTable ordersData={paginationData?.ordersData} orderBy={orderBy} handleOrderBy={handleOrderBy}/>

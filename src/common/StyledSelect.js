@@ -2,12 +2,14 @@ import React from "react";
 import styled from "styled-components";
 import { IoCaretDownSharp } from "react-icons/io5";
 
-const StyledSelect = ({ handle, selected, options, allOptionsText }) => {
+const StyledSelect = ({ handle, selected, options, labelText }) => {
+
   return (
     <Wrapper>
       <Select value={selected} onChange={handle}>
-        {options.map((opt) => (
-          <option key={opt.id} value={opt.id}>{opt.name}</option>
+        <option value={''}>{labelText}</option>
+        {options?.map((opt) => (
+          <option key={opt?.id} value={opt?.id}>{opt?.name}</option>
         ))}
       </Select>
       <Icon />

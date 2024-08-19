@@ -23,12 +23,13 @@ export default Info;
 
 const HomeContainer = styled.div`
   min-height: 100vh;
-  padding: 11vh 2vw;
+  padding: 12vh 2vw;
+  padding-bottom: 0;
   width: 100%;
   color: #000;
   display: flex;
   flex-direction: column;
-  row-gap: 2vh;
+  row-gap: 3.5vh;
 `;
 const Title = styled.h1`
   font-size: 40px;
