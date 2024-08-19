@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const StyledTable = ({ ordersData, orderBy, handleOrderBy }) => {
-  const rows = new Array(10).fill(null);
+  const rows = new Array(6).fill(null);
 
   const getIcon = (item) => {
     if (orderBy === item + "-ASC") return "▲";;

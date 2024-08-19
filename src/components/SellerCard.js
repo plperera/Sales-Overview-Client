@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const SellerCard = ({ sellerData }) => (
   <Container>
     <Title>{"Total of " + sellerData?.sellerName}</Title>
-    <TotalSales>{"$" + sellerData?.totalSales}</TotalSales>
+    <TotalSales>{"$" + sellerData?.totalSales?.toFixed(2)}</TotalSales>
   </Container>
 );
 
@@ -20,6 +20,6 @@ const Title = styled.h3`
   font-size: 28px;
 `
 const TotalSales = styled.div`
-  font-size: 28px;
+  font-size: 34px;
   text-align: right;
 `
