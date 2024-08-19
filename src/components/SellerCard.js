@@ -3,8 +3,8 @@ import styled from 'styled-components';
 
 const SellerCard = ({ sellerData }) => (
   <Container>
-    <Title>{"Total of " + sellerData.name}</Title>
-    <TotalSales>{"$" + sellerData.totalSales}</TotalSales>
+    <Title>{"Total of " + sellerData?.sellerName}</Title>
+    <TotalSales>{"$" + sellerData?.totalSales}</TotalSales>
   </Container>
 );
 

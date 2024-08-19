@@ -95,7 +95,6 @@ const OrdersOverview = () => {
           selected={selectedCountry}
           options={countries}
         />
-        {orderBy}
       </FiltersContainer>
       <StyledTable ordersData={paginationData?.ordersData} orderBy={orderBy} handleOrderBy={handleOrderBy}/>
       <Pagination

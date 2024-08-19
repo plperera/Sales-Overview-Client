@@ -16,7 +16,6 @@ const Pagination = ({ totalPages, selectPageIndex, handlePageIndex }) => {
   return (
     <PaginationContainer>
       <PageNumbersContainer>
-        {/* Botão para ir à primeira página */}
         <ArrowButton
           onClick={() => handlePageIndex(1)}
           disabled={selectPageIndex === 1}
@@ -24,7 +23,6 @@ const Pagination = ({ totalPages, selectPageIndex, handlePageIndex }) => {
           <MdKeyboardDoubleArrowLeft />
         </ArrowButton>
         
-        {/* Números das páginas */}
         {pageNumbers?.map((e) => (
           <PageNumber
             key={e}
@@ -35,7 +33,6 @@ const Pagination = ({ totalPages, selectPageIndex, handlePageIndex }) => {
           </PageNumber>
         ))}
         
-        {/* Botão para ir à última página */}
         <ArrowButton
           onClick={() => handlePageIndex(totalPages)}
           disabled={selectPageIndex === totalPages}
@@ -45,7 +42,6 @@ const Pagination = ({ totalPages, selectPageIndex, handlePageIndex }) => {
       </PageNumbersContainer>
 
       <ButtonsContainer>
-        {/* Botão para ir à página anterior */}
         <StyledButton
           onClick={() => handlePageIndex(selectPageIndex - 1)}
           disabled={selectPageIndex === 1}
@@ -54,7 +50,6 @@ const Pagination = ({ totalPages, selectPageIndex, handlePageIndex }) => {
           <span>Older</span>
         </StyledButton>
 
-        {/* Botão para ir à próxima página */}
         <StyledButton
           onClick={() => handlePageIndex(selectPageIndex + 1)}
           disabled={selectPageIndex === totalPages}

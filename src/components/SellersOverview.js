@@ -1,20 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import SellerCard from "./SellerCard";
+import api from "../services/api";
 
-const BestSellers = [
-  { id: 1, name: "Seller #1", totalSales: 9999.99 },
-  { id: 2, name: "Seller #2", totalSales: 8888.99 },
-  { id: 3, name: "Seller #3", totalSales: 7777.99 },
-];
 
-const SellersOverview = () => (
-  <Container>
-    {BestSellers.map((seller) => (
-      <SellerCard key={seller.id} sellerData={seller}/>
-    ))}
-  </Container>
-);
+const SellersOverview = () => {
+
+  const [bestSellers, setBestSellers] = useState(undefined)
+
+  useEffect(() => {
+    GetTopSellers()
+  }, [])
+
+  async function GetTopSellers() {
+    try {
+      const response = await api.GetTopSellers()
+      setBestSellers(response.data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  return (
+    <Container>
+      {bestSellers?.map((seller) => (
+        <SellerCard key={seller?.sellerId} sellerData={seller}/>
+      ))}
+    </Container>
+  );
+};
 
 export default SellersOverview;
 
