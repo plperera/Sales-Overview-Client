@@ -23,9 +23,13 @@ const SellersOverview = () => {
 
   return (
     <Container>
-      {bestSellers?.map((seller) => (
-        <SellerCard key={seller?.sellerId} sellerData={seller}/>
-      ))}
+      <h3>Top Sellers</h3>
+      <SellersContainer>
+        {bestSellers?.map((seller, index) => (
+          <SellerCard key={seller?.sellerId} sellerData={seller} index={index}/>
+        ))}
+      </SellersContainer>
+      
     </Container>
   );
 };
@@ -33,10 +37,21 @@ const SellersOverview = () => {
 export default SellersOverview;
 
 const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  row-gap: 1.5vh;
   min-height: 10vh;
   width: 100%;
+  padding: 0vh 2vw;
+  > h3 {
+    font-size: 36px;
+    font-weight: 600;
+    color: #9795AC;
+  }
+`;
+
+const SellersContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  column-gap: 1.5vw;
-`;
+`

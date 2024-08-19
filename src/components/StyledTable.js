@@ -35,11 +35,11 @@ const StyledTable = ({ ordersData, orderBy, handleOrderBy }) => {
           const order = ordersData?.[index];
           return (
             <tr key={order?.orderId || index}>
-              <td>{order?.orderId || "-"}</td>
-              <td>{order?.product || "-"}</td>
-              <td>{order?.price || "-"}</td>
-              <td>{order?.seller || "-"}</td>
-              <td>{order?.country || "-"}</td>
+              <StyledTd hasItem={order?.orderId}>{order?.orderId || "-"}</StyledTd>
+              <StyledTd hasItem={order?.orderId}>{order?.product || "-"}</StyledTd>
+              <StyledTd hasItem={order?.orderId}>{order?.price || "-"}</StyledTd>
+              <StyledTd hasItem={order?.orderId}>{order?.seller || "-"}</StyledTd>
+              <StyledTd hasItem={order?.orderId}>{order?.country || "-"}</StyledTd>
             </tr>
           );
         })}
@@ -52,11 +52,9 @@ export default StyledTable;
 
 const TableContainer = styled.table`
   width: 100%;
-  border: 2px solid #000000;
-  border-collapse: collapse;
   font-size: 20px;
   th, td {
-    border: 2px solid #000000;
+    border: 3px solid #F0F0F0;
     padding: 12px;
     text-align: left;
   }
@@ -64,16 +62,28 @@ const TableContainer = styled.table`
 
 const TableHead = styled.thead`
   th {
-    background-color: #800080;
+    font-weight: 600;
+    color: #FFFFFF;
   }
+`;
+const StyledTd = styled.td`
+  color: ${props => props.hasItem ? "initial":"#FFFFFF"};
+  user-select: ${props => props.hasItem ? "initial":"none"};
 `;
 const TableBody = styled.tbody`
   tr {
+    
     &:nth-child(even) {
-      background-color: #dacafb;
+      background-color: #FFFFFF;
+      &:hover{
+        background-color: #5E52FF23;
+      }
     }
     &:nth-child(odd) {
-      background-color: #fffefe;
+      background-color: #F5F2FF;
+      &:hover{
+        background-color: #5E52FF23;
+      }
     }
   }
 `;
@@ -81,5 +91,5 @@ const TableBody = styled.tbody`
 const StyledTh = styled.th`
   cursor: pointer;
   user-select: none;
-  color: ${props => props.isSelected ? ("white"):("initial")};
+  background-color: ${props => props.isSelected ? ("#9452FF"):("#7132D6")};
 `

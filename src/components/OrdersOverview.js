@@ -89,20 +89,23 @@ const OrdersOverview = () => {
 
   return (
     <Container>
-      <FiltersContainer>
-        <StyledSelect
-          handle={handleSeller}
-          selected={selectedSeller}
-          options={sellers}
-          labelText={"All Sellers"}
-        />
-        <StyledSelect
-          handle={handleCountry}
-          selected={selectedCountry}
-          options={countries}
-          labelText={"All Countries"}
-        />
-      </FiltersContainer>
+      <HeadContainer>
+        <h3>Orders</h3>
+        <FiltersContainer>
+          <StyledSelect
+            handle={handleSeller}
+            selected={selectedSeller}
+            options={sellers}
+            labelText={"All Sellers"}
+          />
+          <StyledSelect
+            handle={handleCountry}
+            selected={selectedCountry}
+            options={countries}
+            labelText={"All Countries"}
+          />
+        </FiltersContainer>
+      </HeadContainer>
       <StyledTable ordersData={paginationData?.ordersData} orderBy={orderBy} handleOrderBy={handleOrderBy}/>
       <Pagination
         totalPages={paginationData?.lastPage}
@@ -120,8 +123,22 @@ const Container = styled.div`
   flex-wrap: wrap;
   justify-content: right;
   row-gap: 2vh;
+  padding: 2vh 2vw;
+
 `;
 const FiltersContainer = styled.div`
   display: flex;
   column-gap: 1vw;
+`;
+
+const HeadContainer = styled.div`
+  display: flex;
+  align-items: center;  
+  justify-content: space-between;
+  width: 100%;
+  > h3 {
+    font-size: 36px;
+    font-weight: 600;
+    color: #9795AC;
+  }
 `;

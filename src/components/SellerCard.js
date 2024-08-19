@@ -1,25 +1,54 @@
 import React from 'react';
 import styled from 'styled-components';
+import { FaMedal } from "react-icons/fa6";
 
-const SellerCard = ({ sellerData }) => (
-  <Container>
-    <Title>{"Total of " + sellerData?.sellerName}</Title>
-    <TotalSales>{"$" + sellerData?.totalSales?.toFixed(2)}</TotalSales>
-  </Container>
-);
+const SellerCard = ({ sellerData, index }) => {
+  const color = {
+    0: "#FCC617",
+    1: "#AAAAAA",
+    2: "#C47744"
+  }
+  return (
+    <Container>
+      <Title>{sellerData?.sellerName}</Title>
+      <TotalSales>{"$ " + sellerData?.totalSales?.toFixed(2)}</TotalSales>
+      <MedalIcon medalColor={color[index]}>
+        <FaMedal/>
+      </MedalIcon>
+    </Container>
+  );
+};
 
 export default SellerCard;
 
 const Container = styled.div`
-  width: 100%;
-  border: 3px solid #7E2098;
-  color: #7E2098;
-  padding: 1vw;
+  width: 32%;
+  padding: 2.5vh 1.5vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 3.5vw;
+  position: relative;
+  row-gap: 1.4vh;
+  background: #FFFFFF;
+  border-radius: 10px;
+  border: 5px solid #F0F0F0;
+  color: #000000;
 `;
 const Title = styled.h3`
-  font-size: 28px;
+  font-size: 26px;
+  color: #929292;
 `
 const TotalSales = styled.div`
   font-size: 34px;
-  text-align: right;
+  color: #8820CE;
+  font-weight: 700;
+`
+
+const MedalIcon = styled.div`
+  position: absolute;
+  right: 0.6vw;
+  top: -5px;
+  font-size: 40px;
+  color: ${props => props.medalColor};
 `

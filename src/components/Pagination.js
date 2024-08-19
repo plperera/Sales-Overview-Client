@@ -15,6 +15,24 @@ const Pagination = ({ totalPages, selectPageIndex, handlePageIndex }) => {
 
   return (
     <PaginationContainer>
+      <ButtonsContainer>
+        <StyledButton
+          onClick={() => handlePageIndex(selectPageIndex - 1)}
+          disabled={selectPageIndex === 1}
+        >
+          <FaLongArrowAltLeft />
+          <span>Older</span>
+        </StyledButton>
+
+        <StyledButton
+          onClick={() => handlePageIndex(selectPageIndex + 1)}
+          disabled={selectPageIndex === totalPages}
+        >
+          <span>Newer</span>
+          <FaLongArrowAltRight />
+        </StyledButton>
+      </ButtonsContainer>
+
       <PageNumbersContainer>
         <ArrowButton
           onClick={() => handlePageIndex(1)}
@@ -40,24 +58,7 @@ const Pagination = ({ totalPages, selectPageIndex, handlePageIndex }) => {
           <MdKeyboardDoubleArrowRight />
         </ArrowButton>
       </PageNumbersContainer>
-
-      <ButtonsContainer>
-        <StyledButton
-          onClick={() => handlePageIndex(selectPageIndex - 1)}
-          disabled={selectPageIndex === 1}
-        >
-          <FaLongArrowAltLeft />
-          <span>Older</span>
-        </StyledButton>
-
-        <StyledButton
-          onClick={() => handlePageIndex(selectPageIndex + 1)}
-          disabled={selectPageIndex === totalPages}
-        >
-          <span>Newer</span>
-          <FaLongArrowAltRight />
-        </StyledButton>
-      </ButtonsContainer>
+  
     </PaginationContainer>
   );
 };
@@ -65,83 +66,88 @@ const Pagination = ({ totalPages, selectPageIndex, handlePageIndex }) => {
 export default Pagination;
 
 const PaginationContainer = styled.div`
-  width: 35%;
+  width: 100%;
   display: flex;
-  flex-direction: column;
-  row-gap: 2vh;
+  align-items: center;
+  justify-content: space-between;
 `;
 
 const PageNumbersContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  width: 33%;
+
   > div:first-child {
-    border-left: 2px solid #dadada;
+    border-left: 2px solid #F0F0F0;
     border-radius: 5px 0 0 5px;
-    color: #800080;
+    color: #7132D6;
   }
   > div:last-child {
     border-radius: 0 5px 5px 0;
-    color: #800080;
+    color: #7132D6;
   }
   > div:hover {
     color: #ffffff;
-    background-color: #800080;
-    border-color: #884b88;
+    background-color: #9452FF;
+    border-color: #9452FF;
   }
 `;
 
 const ArrowButton = styled.div`
-  border: 2px solid #dadada;
+  border: 2px solid #F0F0F0;
   border-left: none;
   width: 100%;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 14px 0;
-  font-size: 22px;
+  padding: 12px 0;
+  font-size: 20px;
   cursor: pointer;
   user-select: none;
-  color: ${(props) => (props.disabled ? "#DADADA !important" : "initial")};
-  opacity: ${(props) => (props.disabled ? "0.5" : "1")};
+  color: ${(props) => (props.disabled ? "#C0C0C0 !important" : "initial")};
+  opacity: ${(props) => (props.disabled ? "0.9" : "1")};
   pointer-events: ${(props) => (props.disabled ? "none" : "auto")};
-  background-color: ${(props) => (props.disabled ? "#F5F5F5" : "initial")};
+  background-color: ${(props) => (props.disabled ? "#F5F5F5" : "#FFFFFF")};
 `;
 
 const PageNumber = styled.div`
-  border: 2px solid #dadada;
+  border: 2px solid #F0F0F0;
   border-left: none;
   width: 100%;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 14px 0;
-  font-size: 22px;
+  padding: 12px 0;
+  font-size: 20px;
   cursor: pointer;
   user-select: none;
-  color: ${(props) => (props.isSelected ? "#FFFFFF" : "#800080")};
-  background-color: ${(props) => (props.isSelected ? "#800080" : "initial")};
-  border-color: ${(props) => (props.isSelected ? "#884B88" : "#dadada")};
+  color: ${(props) => (props.isSelected ? "#FFFFFF" : "#7132D6")};
+  background-color: ${(props) => (props.isSelected ? "#7132D6" : "#FFFFFF")};
+  border-color: ${(props) => (props.isSelected ? "#7132D6" : "#F0F0F0")};
 `;
 
 const ButtonsContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  column-gap: 1vw;
 `;
 
 const StyledButton = styled.div`
   display: flex;
   column-gap: 1.4vh;
   font-size: 22px;
-  border: 2px solid #bdbdbd;
+  border: 2px solid #7132D6;
   border-radius: 50px;
   padding: 12px 24px;
-  color: ${(props) => (props.disabled ? "#DADADA" : "#BDBDBD")};
-  opacity: ${(props) => (props.disabled ? "0.5" : "1")};
+  border-color: ${(props) => (props.disabled ? "#F0F0F0" : "#7132D6")};
+  color: ${(props) => (props.disabled ? "#C0C0C0" : "#7132D6")};
+  opacity: ${(props) => (props.disabled ? "0.9" : "1")};
   pointer-events: ${(props) => (props.disabled ? "none" : "pointer")};
-  background-color: ${(props) => (props.disabled ? "#F5F5F5" : "initial")};
+  cursor: ${(props) => (props.disabled ? "none" : "pointer")};
+  background-color: ${(props) => (props.disabled ? "#F5F5F5" : "#FFFFFF")};
   user-select: none;
 `;

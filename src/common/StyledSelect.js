@@ -29,14 +29,15 @@ const Select = styled.select`
   padding: 10px 25px;
   padding-right: calc(25px + 30px);
   border-radius: 10px;
-  border: 3px solid #7c7c7c;
+  border: 3px solid #F0F0F0;
   background-color: #fffefb;
-  color: #434343;
+  color: #7E7E7E;
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
   position: relative;
   cursor: pointer;
+  font-weight: 600;
 
   &:focus {
     outline: none;
@@ -57,8 +58,8 @@ const Icon = styled(IoCaretDownSharp)`
   padding: 10px;
   font-size: 20px;
   color: #696969;
-  border: 3px solid #7c7c7c;
-  background-color: #e6e6e6;
+  border: 3px solid #F0F0F0;
+  background-color: #F0F0F0;
   border-radius: 0 10px 10px 0;
 
   transform: translateY(-50%);

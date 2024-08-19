@@ -18,20 +18,28 @@ export default Menu;
 
 const HeaderContainer = styled.header`
   display: flex;
-  justify-content: right;
+  justify-content: center;
   align-items: center;
-  padding: 2vh 2vw;
-  background-color: #7e2098;
-  color: #ffffff;
-  position: fixed;
-  width: 100%;
+  padding: 1vh 1.5vw;
+  padding-right: 2vw;
+  background-color: #FFFFFF;
+  position: absolute;
   column-gap: 1vw;
+  top: 1vh;
+  right: 0;
+  border-radius: 10px;
 `;
 const MenuItem = styled.div`
-  border: ${props => props.isSelected ? ("4px solid #ffffff"):("2px solid #ffffff")};
+  background-color: ${props => props.isSelected?("#9452FF"):("#7132D6")};
+  color: #FFFFFF;
   padding: 1vh 2vw;
   font-size: 20px;
-  border-radius: 10px;
+  font-weight: 600;
+  border-radius: 5px;
   user-select: none;
   cursor: pointer;
+  transition: all ease .2s;
+  &:hover {
+    transform: translateY(-3px);
+  }
 `;

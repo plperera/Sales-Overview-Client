@@ -23,26 +23,31 @@ export default Info;
 
 const HomeContainer = styled.div`
   min-height: 100vh;
-  padding: 12vh 2vw;
+  padding: 6vh 2vw;
   padding-bottom: 0;
   width: 100%;
-  color: #000;
   display: flex;
   flex-direction: column;
   row-gap: 3.5vh;
+  background-color: #E9E9E9;
 `;
 const Title = styled.h1`
-  font-size: 40px;
-  margin-bottom: 2vh;
+  font-size: 36px;
+  font-weight: 600;
+  color: #9795AC;
 `
 const SubTitle = styled.h2`
-  font-size: 30px;
+  font-size: 36px;
+  color: #8820CE;
 `
 const Description = styled.p`
   font-size: 24px;
+  color: #9795AC;
 `
 const StyledTopics = styled.div`
   padding-left: 3vw;
+  color: #3A3942;
+  font-weight: 600;
   > li {
     margin-bottom: 1vh;
     font-size: 20px;
