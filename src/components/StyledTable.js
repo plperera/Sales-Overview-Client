@@ -1,18 +1,33 @@
 import React from "react";
 import styled from "styled-components";
 
-const StyledTable = ({ ordersData }) => {
+const StyledTable = ({ ordersData, orderBy, handleOrderBy }) => {
   const rows = new Array(10).fill(null);
+
+  const getIcon = (item) => {
+    if (orderBy === item + "-ASC") return "▲";;
+    if (orderBy === item + "-DESC") return "▼"; 
+    return "▼";
+  }
+
+  const TableheadItens = [
+    {id: "orderId", name:" Order Id"},
+    {id: "product", name:" Product"},
+    {id: "price", name:" Price"},
+    {id: "seller", name:" Seller"},
+    {id: "country", name:" Country"},
+  ]
 
   return (
     <TableContainer>
       <TableHead>
         <tr>
-          <th>Order Id</th>
-          <th>Product</th>
-          <th>Price</th>
-          <th>Seller</th>
-          <th>Country</th>
+          {TableheadItens?.map(item => 
+            <StyledTh
+              isSelected={orderBy === item?.id + "-ASC" || orderBy === item?.id + "-DESC"}
+              onClick={() => handleOrderBy(item?.id)}><span>{getIcon(item?.id)}</span> {item?.name}
+            </StyledTh>
+          )}
         </tr>
       </TableHead>
       <TableBody>
@@ -62,3 +77,9 @@ const TableBody = styled.tbody`
     }
   }
 `;
+
+const StyledTh = styled.th`
+  cursor: pointer;
+  user-select: none;
+  color: ${props => props.isSelected ? ("white"):("initial")};
+`

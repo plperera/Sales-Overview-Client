@@ -146,6 +146,7 @@ const StyledButton = styled.div`
   padding: 12px 24px;
   color: ${(props) => (props.disabled ? "#DADADA" : "#BDBDBD")};
   opacity: ${(props) => (props.disabled ? "0.5" : "1")};
-  pointer-events: ${(props) => (props.disabled ? "none" : "auto")};
+  pointer-events: ${(props) => (props.disabled ? "none" : "pointer")};
   background-color: ${(props) => (props.disabled ? "#F5F5F5" : "initial")};
+  user-select: none;
 `;

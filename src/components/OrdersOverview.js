@@ -10,23 +10,39 @@ const OrdersOverview = () => {
   const [selectedCountry, setSelectedCountry] = useState(undefined);
   const [selectPageIndex, setSelectPageIndex] = useState(1);
   const [paginationData, setPaginationData] = useState(undefined);
+  const [orderBy, setOrderBy] = useState(undefined);
 
   useEffect(() => {
-    GetOrders(selectPageIndex, selectedSeller, selectedCountry);
-  }, [selectPageIndex, selectedSeller, selectedCountry]);
+    GetOrders({
+      page: selectPageIndex, 
+      sellerId: selectedSeller, 
+      country: selectedCountry, 
+      orderBy: orderBy
+    });
+  }, [selectPageIndex, selectedSeller, selectedCountry, orderBy]);
 
-  async function GetOrders(page, sellerId, country) {
+  async function GetOrders({page, sellerId, country, orderBy}) {
     try {
       const response = await api.GetOrdersWithPagination({
         page,
         sellerId,
         country,
+        orderBy
       });
       setPaginationData(response?.data);
     } catch (error) {
       console.log(error);
     }
   }
+
+  const handleOrderBy = (item) => {
+    if (orderBy === item + "-ASC") {
+      setOrderBy(item + "-DESC");
+    } else {
+      setOrderBy(item + "-ASC");
+    }
+    setSelectPageIndex(1);
+  };
 
   const handleSeller = (event) => {
     setSelectedSeller(event.target.value);
@@ -79,8 +95,9 @@ const OrdersOverview = () => {
           selected={selectedCountry}
           options={countries}
         />
+        {orderBy}
       </FiltersContainer>
-      <StyledTable ordersData={paginationData?.ordersData} />
+      <StyledTable ordersData={paginationData?.ordersData} orderBy={orderBy} handleOrderBy={handleOrderBy}/>
       <Pagination
         totalPages={paginationData?.lastPage}
         selectPageIndex={selectPageIndex}
