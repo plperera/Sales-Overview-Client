@@ -1,5 +1,5 @@
 {
-  "name": "private-react-base",
+  "name": "web-app",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -17,6 +17,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "author": "Pedro Leoncio",
   "browserslist": {
     "production": [
       ">0.2%",
