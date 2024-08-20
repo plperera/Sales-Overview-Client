@@ -11,9 +11,10 @@ const SellerCard = ({ sellerData, index }) => {
     2: "#C47744"
   }
   const { openModal, closeModal } = useModal();
+
   return (
-    <Container>
-      <Title onClick={() => openModal(<SellerModal />)}>{sellerData?.sellerName}</Title>
+    <Container onClick={() => openModal(<SellerModal sellerId={sellerData?.sellerId}/>)}>
+      <Title>{sellerData?.sellerName}</Title>
       <TotalSales>{"$ " + sellerData?.totalSales?.toFixed(2)}</TotalSales>
       <MedalIcon medalColor={color[index]}>
         <FaMedal/>
@@ -36,7 +37,16 @@ const Container = styled.div`
   background: #FFFFFF;
   border-radius: 10px;
   border: 5px solid #F0F0F0;
-  color: #000000;
+  cursor: pointer;
+  user-select: none;
+  transition: all ease .2s;
+  &:hover {
+    transform: scale(1.05);
+    border: 5px solid #757BA7;
+    > h3 {
+      color: #606691;
+    }
+  }
 `;
 const Title = styled.h3`
   font-size: 26px;

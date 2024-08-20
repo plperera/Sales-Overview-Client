@@ -1,31 +1,45 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useModal } from '../context/ModalContext';
 import PizzaGraphic from '../common/PizzaGraphic';
 import { IoClose } from "react-icons/io5";
+import api from '../services/api';
 
-const SellerModal = () => {
+const SellerModal = ({sellerId}) => {
   const { closeModal } = useModal();
+  const [sellerData, setSellerData] = useState(undefined)
 
-  const sellerData = {
-    name: "Seller Name #1",
-    totalSales: 150,
-    totalValue: 12745,
-    salesByCountry: [
-      { name: "BRA", amount: 6250, color: "#36A0DD"},
-      { name: "ARG", amount: 4248, color: "#9452FF"},
-      { name: "MEX", amount: 2247, color: "#DD36AB"},
-    ],
-    topProducts: [
-      {name: "Notebook #1", sales: 12},
-      {name: "Printer #1", sales: 12},
-      {name: "Smartphone #1", sales: 12}
-    ]
-  };
+  useEffect(() => {
+    GetSellerData(sellerId)
+  }, [])
 
-  const totalSalesValue = sellerData.salesByCountry.reduce((acc, country) => acc + country.amount, 0);
+  async function GetSellerData(sellerId) {
+    try {
+      const response = await api.GetSellerById(sellerId)
+      setSellerData(response.data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
-  const getPercentage = (value) => ((value / totalSalesValue) * 100).toFixed(2);
+  // const sellerData = {
+  //   name: "Seller Name #1",
+  //   totalSales: 150,
+  //   totalValue: 12745,
+  //   salesByCountry: [
+  //     { name: "BRA", amount: 6250, color: "#36A0DD"},
+  //     { name: "ARG", amount: 4248, color: "#9452FF"},
+  //     { name: "MEX", amount: 2247, color: "#DD36AB"},
+  //   ],
+  //   topProducts: [
+  //     {name: "Notebook #1", sales: 12},
+  //     {name: "Printer #1", sales: 12},
+  //     {name: "Smartphone #1", sales: 12}
+  //   ]
+  // };
+
+
+  const getPercentage = (value) => ((value / sellerData?.totalValue) * 100).toFixed(2);
 
   return (
     <Container>
@@ -33,6 +47,7 @@ const SellerModal = () => {
         <Title>{sellerData?.name}</Title>
         <StyledIcon onClick={closeModal}/>
       </TopContainer>
+
       <GraphicContainer>
         
         <PizzaGraphic data={sellerData?.salesByCountry} size={"250px"}/>
@@ -49,7 +64,24 @@ const SellerModal = () => {
 
       </GraphicContainer>
 
-      <SubTitle>Produtos mais Vendidos</SubTitle>
+      {/* <SubTitle>Totals</SubTitle> */}
+
+      <TotalsContainer>
+        <TotalCard>
+          <p>{"$ " + sellerData?.totalValue}</p>
+          <p>Sales Value</p>
+        </TotalCard>
+        <TotalCard>
+          <p>{sellerData?.totalSales}</p>
+          <p>Number of Sales</p>
+        </TotalCard>
+        <TotalCard>
+          <p>{"$ " + sellerData?.totalValue / sellerData?.totalSales}</p>
+          <p>Average Ticket</p>
+        </TotalCard>
+      </TotalsContainer>
+
+      <SubTitle>Best Selling Products</SubTitle>
 
       <ProductsContainer>
         {sellerData?.topProducts?.map(product => 
@@ -60,6 +92,7 @@ const SellerModal = () => {
         )}
         
       </ProductsContainer>
+ 
     </Container>
   );
 };
@@ -161,8 +194,8 @@ const CountrySales = styled.p`
 const ProductsContainer = styled.div`
   display: flex;
   padding: 1.5vh 0;
+  padding-bottom: 0;
   column-gap: 1vw;
-  row-gap: 2vh;
 `
 const ProductCard = styled.div`
   padding: 2.5vh 2vw;
@@ -184,10 +217,31 @@ const ProductSales = styled.p`
   font-size: 16px;
   font-weight: 600;
   color: #FFFFFF;
-  padding: 6px;
+  padding: 6px 10px;
   border-radius: 10px;
   position: absolute;
   top: -2.2vh;  
   border: 4px solid #F0F0F0;
-
+`
+const TotalsContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 2vh 0;
+  column-gap: 1vw;
+`
+const TotalCard = styled.div`
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  row-gap: 1vh;
+  > *:first-child {
+    font-size: 22px;
+    font-weight: 600;
+    color: #44434D;
+  }
+  > *:last-child {
+    font-size: 14px;
+    color: #9795AC;
+  }
 `

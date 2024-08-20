@@ -17,10 +17,15 @@ function GetSellers() {
   return axios.get(`${BASE_URL}/sellers/all`);
 }
 
+function GetSellerById(sellerId) {
+  return axios.get(`${BASE_URL}/sellers/unique/${sellerId}`);
+}
+
 const api = {
   GetOrdersWithPagination,
   GetTopSellers,
-  GetSellers
+  GetSellers,
+  GetSellerById
 };
 
 export default api;

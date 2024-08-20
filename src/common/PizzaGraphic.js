@@ -18,15 +18,15 @@ const PizzaGraphic = ({ data, size }) => {
   })
 
   const gradient = segments
-    .map((segment, index) => {
+    ?.map((segment, index) => {
       const startAngle =
         segments
-          .slice(0, index)
-          .reduce((acc, segment) => acc + segment.percentage, 0) * 3.6;
-      const endAngle = startAngle + segment.percentage * 3.6;
-      return `${segment.color} ${startAngle}deg ${endAngle}deg`;
+          ?.slice(0, index)
+          ?.reduce((acc, segment) => acc + segment?.percentage, 0) * 3.6;
+      const endAngle = startAngle + segment?.percentage * 3.6;
+      return `${segment?.color} ${startAngle}deg ${endAngle}deg`;
     })
-    .join(", ");
+    ?.join(", ");
 
   return (
     <>
