@@ -5,7 +5,7 @@ import { IoCaretDownSharp } from "react-icons/io5";
 const StyledSelect = ({ handle, selected, options, labelText }) => {
 
   return (
-    <Wrapper>
+    <Container>
       <Select value={selected} onChange={handle}>
         <option value={''}>{labelText}</option>
         {options?.map((opt) => (
@@ -13,13 +13,13 @@ const StyledSelect = ({ handle, selected, options, labelText }) => {
         ))}
       </Select>
       <Icon />
-    </Wrapper>
+    </Container>
   );
 };
 
 export default StyledSelect;
 
-const Wrapper = styled.div`
+const Container = styled.div`
   position: relative;
 `;
 
