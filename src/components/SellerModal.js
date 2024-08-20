@@ -22,23 +22,6 @@ const SellerModal = ({sellerId}) => {
     }
   }
 
-  // const sellerData = {
-  //   name: "Seller Name #1",
-  //   totalSales: 150,
-  //   totalValue: 12745,
-  //   salesByCountry: [
-  //     { name: "BRA", amount: 6250, color: "#36A0DD"},
-  //     { name: "ARG", amount: 4248, color: "#9452FF"},
-  //     { name: "MEX", amount: 2247, color: "#DD36AB"},
-  //   ],
-  //   topProducts: [
-  //     {name: "Notebook #1", sales: 12},
-  //     {name: "Printer #1", sales: 12},
-  //     {name: "Smartphone #1", sales: 12}
-  //   ]
-  // };
-
-
   const getPercentage = (value) => ((value / sellerData?.totalValue) * 100).toFixed(2);
 
   return (
@@ -64,8 +47,6 @@ const SellerModal = ({sellerId}) => {
 
       </GraphicContainer>
 
-      {/* <SubTitle>Totals</SubTitle> */}
-
       <TotalsContainer>
         <TotalCard>
           <p>{"$ " + sellerData?.totalValue}</p>
@@ -76,7 +57,7 @@ const SellerModal = ({sellerId}) => {
           <p>Number of Sales</p>
         </TotalCard>
         <TotalCard>
-          <p>{"$ " + sellerData?.totalValue / sellerData?.totalSales}</p>
+          <p>{"$ " + (sellerData?.totalValue / sellerData?.totalSales)?.toFixed(0)}</p>
           <p>Average Ticket</p>
         </TotalCard>
       </TotalsContainer>

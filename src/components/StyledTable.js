@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import { useModal } from "../context/ModalContext";
+import SellerModal from "./SellerModal";
 
 const StyledTable = ({ ordersData, orderBy, handleOrderBy }) => {
   const rows = new Array(6).fill(null);
@@ -8,6 +10,16 @@ const StyledTable = ({ ordersData, orderBy, handleOrderBy }) => {
     if (orderBy === item + "-ASC") return "▲";;
     if (orderBy === item + "-DESC") return "▼"; 
     return "▼";
+  }
+
+  const { openModal, closeModal } = useModal();
+
+  const handleModal = (sellerId) => {
+    if (!sellerId) {
+      return
+    }
+    openModal(<SellerModal sellerId={sellerId}/>)
+    return
   }
 
   const TableheadItens = [
@@ -38,7 +50,9 @@ const StyledTable = ({ ordersData, orderBy, handleOrderBy }) => {
               <StyledTd hasItem={order?.orderId}>{order?.orderId || "-"}</StyledTd>
               <StyledTd hasItem={order?.orderId}>{order?.product || "-"}</StyledTd>
               <StyledTd hasItem={order?.orderId}>{order?.price || "-"}</StyledTd>
-              <StyledTd hasItem={order?.orderId}>{order?.seller || "-"}</StyledTd>
+              <StyledTd hasItem={order?.orderId} hasModal={!!order?.sellerId} 
+                onClick={() => handleModal(order?.sellerId)}
+              >{order?.seller || "-"}</StyledTd>
               <StyledTd hasItem={order?.orderId}>{order?.country || "-"}</StyledTd>
             </tr>
           );
@@ -69,6 +83,13 @@ const TableHead = styled.thead`
 const StyledTd = styled.td`
   color: ${props => props.hasItem ? "initial":"#FFFFFF"};
   user-select: ${props => props.hasItem ? "initial":"none"};
+  transition: all ease .2s;
+  cursor: ${props => props.hasModal ? "pointer":"initial"};
+  &:hover {
+    transform: ${props => props.hasModal ? "scale(1.02)":"none"};
+    color: ${props => props.hasModal ? "#606691":""};
+    text-decoration: ${props => props.hasModal ? "underline":"initial"};
+  }
 `;
 const TableBody = styled.tbody`
   tr {
