@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import StyledTable from "./StyledTable";
-import StyledSelect from "../common/StyledSelect";
-import api from "../services/api";
+import StyledSelect from "../../common/StyledSelect";
+import api from "../../services/api";
 import Pagination from "./Pagination";
 
 const OrdersOverview = () => {

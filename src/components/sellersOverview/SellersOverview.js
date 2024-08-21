@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import SellerCard from "./SellerCard";
-import api from "../services/api";
-
+import api from "../../services/api";
 
 const SellersOverview = () => {
 
@@ -25,9 +24,15 @@ const SellersOverview = () => {
     <Container>
       <h3>Top Sellers</h3>
       <SellersContainer>
-        {bestSellers?.map((seller, index) => (
-          <SellerCard key={seller?.sellerId} sellerData={seller} index={index}/>
-        ))}
+        {bestSellers && bestSellers?.length > 0 ? (
+          bestSellers.map((seller, index) => (
+            <SellerCard key={seller?.sellerId} sellerData={seller} index={index}/>
+          ))
+        ) : (
+          <NoDataCard>
+            <p>No sellers available at the moment.</p>
+          </NoDataCard>
+        )}
       </SellersContainer>
       
     </Container>
@@ -55,3 +60,18 @@ const SellersContainer = styled.div`
   align-items: center;
   justify-content: space-between;
 `
+
+const NoDataCard = styled.div`
+  width: 100%;
+  padding: 2.5vh 1.5vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #FFFFFF;
+  border-radius: 10px;
+  border: 5px solid #F0F0F0;
+  text-align: center;
+  color: #9795AC;
+  font-size: 24px;
+  font-weight: 600;
+`;

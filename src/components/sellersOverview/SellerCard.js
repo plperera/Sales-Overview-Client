@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import { FaMedal } from "react-icons/fa6";
-import { useModal } from '../context/ModalContext';
-import SellerModal from './SellerModal';
+import { useModal } from '../../context/ModalContext';
+import SellerModal from '../sellerModal/SellerModal';
+import { formatValue } from '../../utils/formatValue';
 
 const SellerCard = ({ sellerData, index }) => {
   const color = {
@@ -10,12 +11,12 @@ const SellerCard = ({ sellerData, index }) => {
     1: "#AAAAAA",
     2: "#C47744"
   }
-  const { openModal, closeModal } = useModal();
-
+  const { openModal } = useModal();
+  
   return (
     <Container onClick={() => openModal(<SellerModal sellerId={sellerData?.sellerId}/>)}>
       <Title>{sellerData?.sellerName}</Title>
-      <TotalSales>{"$ " + sellerData?.totalSales?.toFixed(2)}</TotalSales>
+      <TotalSales>{"$ " + formatValue({value: sellerData?.totalSales, min: 2, max: 2})}</TotalSales>
       <MedalIcon medalColor={color[index]}>
         <FaMedal/>
       </MedalIcon>

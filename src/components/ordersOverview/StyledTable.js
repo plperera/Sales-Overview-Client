@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import { useModal } from "../context/ModalContext";
-import SellerModal from "./SellerModal";
+import { useModal } from "../../context/ModalContext";
+import SellerModal from "../sellerModal/SellerModal";
+import { formatValue } from "../../utils/formatValue";
 
 const StyledTable = ({ ordersData, orderBy, handleOrderBy }) => {
   const rows = new Array(6).fill(null);
@@ -12,7 +13,7 @@ const StyledTable = ({ ordersData, orderBy, handleOrderBy }) => {
     return "▼";
   }
 
-  const { openModal, closeModal } = useModal();
+  const { openModal } = useModal();
 
   const handleModal = (sellerId) => {
     if (!sellerId) {
@@ -49,7 +50,7 @@ const StyledTable = ({ ordersData, orderBy, handleOrderBy }) => {
             <tr key={order?.orderId || index}>
               <StyledTd hasItem={order?.orderId}>{order?.orderId || "-"}</StyledTd>
               <StyledTd hasItem={order?.orderId}>{order?.product || "-"}</StyledTd>
-              <StyledTd hasItem={order?.orderId}>{order?.price || "-"}</StyledTd>
+              <StyledTd hasItem={order?.orderId}>{formatValue({value: order?.price}) || "-"}</StyledTd>
               <StyledTd hasItem={order?.orderId} hasModal={!!order?.sellerId} 
                 onClick={() => handleModal(order?.sellerId)}
               >{order?.seller || "-"}</StyledTd>
