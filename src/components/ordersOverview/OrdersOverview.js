@@ -6,25 +6,29 @@ import api from "../../services/api";
 import Pagination from "./Pagination";
 
 const OrdersOverview = () => {
-  const [selectedSeller, setSelectedSeller] = useState(undefined);
-  const [selectedCountry, setSelectedCountry] = useState(undefined);
-  const [selectPageIndex, setSelectPageIndex] = useState(1);
-  const [paginationData, setPaginationData] = useState(undefined);
-  const [orderBy, setOrderBy] = useState(undefined);
+  const [filters, setFilters] = useState({
+    sellerId: undefined,
+    country: undefined,
+    orderBy: undefined,
+  });
+
+  const [pagination, setPagination] = useState({
+    pageIndex: 1,
+    data: undefined,
+  });
+
   const [sellers, setSellers] = useState(undefined);
 
   useEffect(() => {
     GetOrders({
-      page: selectPageIndex, 
-      sellerId: selectedSeller, 
-      country: selectedCountry, 
-      orderBy: orderBy
+      page: pagination.pageIndex, 
+      ...filters
     });
-  }, [selectPageIndex, selectedSeller, selectedCountry, orderBy]);
+  }, [pagination.pageIndex, filters]);
 
   useEffect(() => {
-    GetSellers()
-  }, [])
+    GetSellers();
+  }, []);
 
   async function GetSellers() {
     try {
@@ -35,7 +39,7 @@ const OrdersOverview = () => {
     }
   }
 
-  async function GetOrders({page, sellerId, country, orderBy}) {
+  async function GetOrders({ page, sellerId, country, orderBy }) {
     try {
       const response = await api.GetOrdersWithPagination({
         page,
@@ -43,42 +47,39 @@ const OrdersOverview = () => {
         country,
         orderBy
       });
-      setPaginationData(response?.data);
+      setPagination((prev) => ({ ...prev, data: response?.data }));
     } catch (error) {
       console.log(error);
     }
   }
 
+  const handleFilterChange = (event, filterType) => {
+    setFilters(prevFilters => ({
+      ...prevFilters,
+      [filterType]: event.target.value,
+    }));
+    setPagination(prev => ({ ...prev, pageIndex: 1 }));
+  };
+
   const handleOrderBy = (item) => {
-    if (orderBy === item + "-ASC") {
-      setOrderBy(item + "-DESC");
-    } else {
-      setOrderBy(item + "-ASC");
-    }
-    setSelectPageIndex(1);
-  };
-
-  const handleSeller = (event) => {
-    setSelectedSeller(event.target.value);
-    setSelectPageIndex(1);
-  };
-
-  const handleCountry = (event) => {
-    setSelectedCountry(event.target.value);
-    setSelectPageIndex(1);
+    setFilters(prevFilters => ({
+      ...prevFilters,
+      orderBy: prevFilters.orderBy === item + "-ASC" ? item + "-DESC" : item + "-ASC"
+    }));
+    setPagination(prev => ({ ...prev, pageIndex: 1 }));
   };
 
   const handlePageIndex = (index) => {
     if (
-      !paginationData ||
-      !paginationData.lastPage ||
-      index > paginationData.lastPage ||
+      !pagination.data ||
+      !pagination.data.lastPage ||
+      index > pagination.data.lastPage ||
       index < 1
     ) {
       return;
     }
 
-    setSelectPageIndex(index);
+    setPagination((prev) => ({ ...prev, pageIndex: index }));
   };
 
   const countries = [
@@ -93,23 +94,27 @@ const OrdersOverview = () => {
         <h3>Orders</h3>
         <FiltersContainer>
           <StyledSelect
-            handle={handleSeller}
-            selected={selectedSeller}
+            handle={(e) => handleFilterChange(e, 'sellerId')}
+            selected={filters.sellerId}
             options={sellers}
             labelText={"All Sellers"}
           />
           <StyledSelect
-            handle={handleCountry}
-            selected={selectedCountry}
+            handle={(e) => handleFilterChange(e, 'country')}
+            selected={filters.country}
             options={countries}
             labelText={"All Countries"}
           />
         </FiltersContainer>
       </HeadContainer>
-      <StyledTable ordersData={paginationData?.ordersData} orderBy={orderBy} handleOrderBy={handleOrderBy}/>
+      <StyledTable 
+        ordersData={pagination.data?.ordersData} 
+        orderBy={filters.orderBy} 
+        handleOrderBy={handleOrderBy} 
+      />
       <Pagination
-        totalPages={paginationData?.lastPage}
-        selectPageIndex={selectPageIndex}
+        totalPages={pagination.data?.lastPage}
+        selectPageIndex={pagination.pageIndex}
         handlePageIndex={handlePageIndex}
       />
     </Container>
@@ -124,8 +129,8 @@ const Container = styled.div`
   justify-content: right;
   row-gap: 2vh;
   padding: 2vh 2vw;
-
 `;
+
 const FiltersContainer = styled.div`
   display: flex;
   column-gap: 1vw;

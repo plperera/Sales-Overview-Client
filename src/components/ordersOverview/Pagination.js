@@ -1,10 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { FaLongArrowAltLeft, FaLongArrowAltRight } from "react-icons/fa";
-import {
-  MdKeyboardDoubleArrowLeft,
-  MdKeyboardDoubleArrowRight,
-} from "react-icons/md";
+import { MdKeyboardDoubleArrowLeft, MdKeyboardDoubleArrowRight } from "react-icons/md";
 
 const Pagination = ({ totalPages, selectPageIndex, handlePageIndex }) => {
   const pageNumbers = [];
@@ -58,7 +55,6 @@ const Pagination = ({ totalPages, selectPageIndex, handlePageIndex }) => {
           <MdKeyboardDoubleArrowRight />
         </ArrowButton>
       </PageNumbersContainer>
-  
     </PaginationContainer>
   );
 };
@@ -77,21 +73,6 @@ const PageNumbersContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   width: 33%;
-
-  > div:first-child {
-    border-left: 2px solid #F0F0F0;
-    border-radius: 5px 0 0 5px;
-    color: #7132D6;
-  }
-  > div:last-child {
-    border-radius: 0 5px 5px 0;
-    color: #7132D6;
-  }
-  > div:hover {
-    color: #ffffff;
-    background-color: #9452FF;
-    border-color: #9452FF;
-  }
 `;
 
 const ArrowButton = styled.div`
