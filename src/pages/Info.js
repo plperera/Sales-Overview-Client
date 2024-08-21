@@ -13,7 +13,7 @@ const Info = () => (
     </LeftContainer>
 
     <RightContainer>
-    <a href="https://www.linkedin.com/in/pedro-leoncio/" target="_blank" rel="noopener noreferrer">
+      <a href="https://www.linkedin.com/in/pedro-leoncio/" target="_blank" rel="noopener noreferrer">
         <img 
           src="https://media.licdn.com/dms/image/v2/D4D03AQG9MT-ObqKDgA/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1686666138443?e=1729728000&v=beta&t=l8iyvgZvGqu4i432aGEGVCKnIfvSoXbx0H5NoUi2sgQ" 
           alt="LinkedIn Profile" 
@@ -66,7 +66,6 @@ const Info = () => (
         <FeatureText>Displays information about the technologies used</FeatureText>
       </FeatureCard>
     </FeaturesContainer>
-
     
   </InfoContainer>
 );
