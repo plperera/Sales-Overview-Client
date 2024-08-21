@@ -23,7 +23,7 @@ const HeaderContainer = styled.header`
   padding: 1vh 1.5vw;
   padding-right: 2vw;
   background-color: #FFFFFF;
-  position: absolute;
+  position: fixed;
   column-gap: 1vw;
   top: 1vh;
   right: 0;

@@ -73,6 +73,12 @@ const PageNumbersContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   width: 33%;
+  > *:first-child {
+    border-radius: 10px 0 0 10px;
+  }
+  > *:last-child {
+    border-radius: 0 10px 10px 0;
+  }
 `;
 
 const ArrowButton = styled.div`
@@ -87,10 +93,14 @@ const ArrowButton = styled.div`
   font-size: 20px;
   cursor: pointer;
   user-select: none;
-  color: ${(props) => (props.disabled ? "#C0C0C0 !important" : "initial")};
+  color: ${(props) => (props.disabled ? "#C0C0C0 !important" : "#7132D6")};
   opacity: ${(props) => (props.disabled ? "0.9" : "1")};
   pointer-events: ${(props) => (props.disabled ? "none" : "auto")};
   background-color: ${(props) => (props.disabled ? "#F5F5F5" : "#FFFFFF")};
+  &:hover {
+    color: ${(props) => (props.disabled ? "#C0C0C0 !important" : "#FFFFFF")};
+    background-color: ${(props) => (props.disabled ? "#F5F5F5" : "#7132D6")};
+  }
 `;
 
 const PageNumber = styled.div`
@@ -108,6 +118,11 @@ const PageNumber = styled.div`
   color: ${(props) => (props.isSelected ? "#FFFFFF" : "#7132D6")};
   background-color: ${(props) => (props.isSelected ? "#7132D6" : "#FFFFFF")};
   border-color: ${(props) => (props.isSelected ? "#7132D6" : "#F0F0F0")};
+  &:hover {
+    color: ${(props) => (props.isSelected ? "#FFFFFF" : "#FFFFFF")};
+    background-color: ${(props) => (props.isSelected ? "#7132D6" : "#9452FF")};
+    border-color: ${(props) => (props.isSelected ? "#7132D6" : "#9452FF")};
+  }
 `;
 
 const ButtonsContainer = styled.div`
@@ -131,4 +146,9 @@ const StyledButton = styled.div`
   cursor: ${(props) => (props.disabled ? "none" : "pointer")};
   background-color: ${(props) => (props.disabled ? "#F5F5F5" : "#FFFFFF")};
   user-select: none;
+  &:hover {
+    color: #FFFFFF;
+    background-color: #9452FF;
+    border-color: #9452FF;
+  }
 `;
