@@ -70,8 +70,8 @@ A page that presents information about the technologies used in the project.
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/plperera/front-development-test-rtb-house.git
-   cd front-development-test-rtb-house
+   git clone https://github.com/plperera/Sales-Overview-Client.git
+   cd Sales-Overview-Client
    ```
 
 2. **Install dependencies:**
