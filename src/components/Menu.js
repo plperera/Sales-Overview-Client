@@ -28,6 +28,7 @@ const HeaderContainer = styled.header`
   top: 1vh;
   right: 0;
   border-radius: 10px;
+  z-index: 999;
 `;
 const MenuItem = styled.div`
   background-color: ${props => props.isSelected?("#9452FF"):("#7132D6")};
